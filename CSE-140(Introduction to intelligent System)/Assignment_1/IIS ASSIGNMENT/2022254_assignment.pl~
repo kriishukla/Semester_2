@@ -1,0 +1,22 @@
+:- dynamic playlist/2.
+
+playlist(Name, []) :-
+    asserta(playlist(Name, [])),
+    write('Playlist added successfully\n').
+
+add_song(Name, Title, Artist, UpdatedPlaylist) :-
+    retract(playlist(Name, Songs)),
+    asserta(playlist(Name, [[Title, Artist] | Songs])),
+    UpdatedPlaylist = playlist(Name, [[Title, Artist] | Songs]),
+    write('Song added successfully\n').
+
+display_playlist(Name) :-
+    playlist(Name, Songs),
+    write('Playlist: '), write(Name), nl,
+    write('Songs:'), nl,
+    display_songs(Songs).
+
+display_songs([]).
+display_songs([[Title, Artist] | Rest]) :-
+    write('  - '), write(Title), write(' by '), write(Artist), nl,
+    display_songs(Rest).
