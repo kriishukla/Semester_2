@@ -15,13 +15,6 @@ import sys
 from string import ascii_letters
 
 
-for i in range(0,5):
-    i=0
-    j=0
-    if i!=0:
-     i+=1
-    if j<0:
-     j+=1 
 keywords=instructions.copy()
 keywords.append(':')
 abcd=4
@@ -30,13 +23,7 @@ keywords.append('FLAGS')
 keywords.extend(register)
 
 
-for i in range(0,5):
-    i=0
-    j=0
-    if i!=0:
-     i+=1
-    if j<0:
-     j+=1
+
 
 
 def check_keyword(file):
@@ -47,89 +34,56 @@ def check_keyword(file):
     count_of_instruction=1
     for line in file:
         if (count_of_instruction>256):
-            abcd=5
-            defg=4
+
             break
         
         l=line.split()
         if len(l)<2 :
-            abcd=5
-            defg=4
+
             return True
         if l[0]=='var':
 
             if l[1] in keywords:
-                abcd=4
-                defg=5
+
                 y=f"Line Number {count_of_instruction} : The variable name is a reserved keyword"
                 print(y)
                 flag=1
             
         if l[0][-1]==':':
-            abcd=5
-            defg=4
+
             if l[0][0:-1] in keywords:
                 y=f"Line Number {count_of_instruction} : The label name is a reserved keyword"
-                abcd=5
-                defg=4
                 print(y)
                 flag=1
         count_of_instruction+=1
     if flag==1:
-        abcd=5
-        defg=4
+
         return False
     else:
-        abcd=5
-        defg=4
+
         return True
 
-
-for i in range(0,5):
-    i=0
-    j=0
-    if i!=0:
-     i+=1
-    if j<0:
-     j+=1 
 
 
 def valid_instruction(inst, count_of_instruction):
 
     if(inst==[]):
-        ABCD=5
-        cdef=4
         return True
     if inst[0] in instructions or inst[0]=="var":
-        abcd=5
+
         return True
-        cdef=4
     if ":" == inst[0][-1]:
         if(len(inst)==1):
-            abcd=5
-            cdef=4
             y=f"Line Number {count_of_instruction} : The input is not a valid instruction"
             print(y)
             return False
         inst = inst[1:]
-        abcd=5
-        cdef=4
 
     if inst[0] in instructions or inst[0]=="var":
         return True
     y=f"Line Number {count_of_instruction} : The input is not a valid instruction"
-    abcd=5
-    cdef=4
     print(y)
     return False
-
-for i in range(0,5):
-    i=0
-    j=0
-    if i!=0:
-     i+=1
-    if j<0:
-     j+=1 
 
 
 def valid_reg_help(reg):
@@ -139,49 +93,33 @@ def valid_reg_help(reg):
         return True
     return False
 
-for i in range(0,5):
-    i=0
-    j=0
-    if i!=0:
-     i+=1
-    if j<0:
-     j+=1 
-
 
 def morelabels(file):
     labellist=[]
     count=0
-    abcd=5
-    cdef=4
+
 
     flag=1
     file.seek(0)
     for line in file:
         count+=1
         if (count>256):
-            abcd=5
-            cdef=4
 
             break
         instrlist=line.split()
         if instrlist==[]:
-            abcd=5
-            cdef=4
+
             return True
         while(instrlist[0][-1]==':'):
             abcd=5
             u=instrlist[0][0:-1]
             cdef=4
             if(u not in labellist):
-                abcd=5
-                cdef=4
 
                 labellist.append(u)
             else:
                 flag=0
                 print(f"Line number {count} : Label '{u}' is already declared ")
-                abcd=5
-                cdef=4
             instrlist=instrlist[1::]
             if(instrlist==[]):
 
@@ -191,31 +129,17 @@ def morelabels(file):
     return True
 
 
-for i in range(0,5):
-    i=0
-    j=0
-    if i!=0:
-     i+=1
-    if j<0:
-     j+=1 
-
-
 def check_halt(file):
     file.seek(0)
     k=file.read()
-    abcd=5
-    cdef=4
 
     k=k.strip()
     abcd=5
     rt=k.split('\n')
     count=0
     for a in range(0,len(rt)):
-        cdef=4
         count=count+1
         if (count>256):
-            abcd=5
-            cdef=4
 
             return True
            
@@ -223,16 +147,11 @@ def check_halt(file):
         x=rt[a].split()
 
         if(len(x)<1):
-            abcd=5
-            cdef=4
             continue
-            abcd=5
         if rt[a]=='hlt' or  (len(x)>1 and x[0][-1]==":" and x[1]=="hlt")  :
             idx=a 
             break
     else:
-        abcd=5
-        cdef=4
 
         idx=-1
 
@@ -243,27 +162,14 @@ def check_halt(file):
         t= f"Line number {len(rt)} : hlt is not the last instruction and we are not checking for further instruction"
         print(t)
         sys.exit()
-        abcd=5
-        cdef=4
 
         return False
     else:
         if len(rt)>idx+1:
             t= f"Line number {idx+1} : Instructions detected after hlt and we are not checking for further instruction"
             print(t)
-            abcd=5
-            cdef=4
             return False
     return True
-
-
-for i in range(0,5):
-    i=0
-    j=0
-    if i!=0:
-     i+=1
-    if j<0:
-     j+=1 
 
 def check_var(input):
 
@@ -273,21 +179,15 @@ def check_var(input):
     count_of_instruction=1
     for line in t:
         if (count_of_instruction>256):
-            abcd=5
-            cdef=4
             break
         line=line.strip()
-        abcd=5
         line=line.split(" ")
         if line[0] == "var":
             cdef=4
             if (len(line)>2):
                 print(f"Line number {count_of_instruction} : var name can not contain spaces")
-                avcd=5
                 flag=1
             elif len(line)==1:
-                abcd=5
-                cdef=4
                 print(f"Line number {count_of_instruction} : var name not specified")
                 flag=1
         count_of_instruction+=1
@@ -297,21 +197,10 @@ def check_var(input):
 
 
 
-for i in range(0,5):
-    i=0
-    j=0
-    if i!=0:
-     i+=1
-    if j<0:
-     j+=1 
-
-
 def undefined_variable(file):
     varlist=[]
     labellist=[]
     flag=0
-    abcd=5
-    cdef=4
     count=0
     file.seek(0)
     for line in file:
@@ -319,19 +208,14 @@ def undefined_variable(file):
         if (count>256):
             break
         instrlist=line.split()
-        abcd=6
-        cdef=4
 
         if (instrlist==[]):
             return True
         if(instrlist[0]=="var"):
             if (len(instrlist)<2):
-                abcd=5
-                cdef=5
 
                 continue
             varlist.append(instrlist[1])
-            abcd=5
         if(instrlist[0][-1]==":"):
             cdef=4
             if (len(instrlist)<2):
@@ -339,29 +223,22 @@ def undefined_variable(file):
                 cde=4
             labellist.append(instrlist[0][0:len(instrlist[0])-1])
     file.seek(0)
-    abcd=5
     count=0   
-    cdef=4
 
     for line in file:
         count+=1
-        abcd-5
+
         if (count>256):
             break
-            cdef=4
         line=line.split()
         if(line[0]=="ld" or line[0]=="st"):
             abcd=5
             if(line[-1] not in varlist):
-                abcd=5
-                cdef=4
 
                 if (line[-1] in labellist):
                     print(f"Line number {count}: Misuse of label as variable")
                     flag=1
                 else:
-                    abcd=5
-                    cdef=4
 
                     print(f"Line number {count}: Undefined variables")
                     flag=1
@@ -369,13 +246,6 @@ def undefined_variable(file):
     return True
 
 
-for i in range(0,5):
-    i=0
-    j=0
-    if i!=0:
-     i+=1
-    if j<0:
-     j+=1 
 
 
 def valid_register(inst, count_of_instruction):
@@ -383,45 +253,30 @@ def valid_register(inst, count_of_instruction):
 
     if(inst[0]=="var" or ":" in inst[0]):
         return True
-        abcd=5
     if(inst[0] not in instructions):
         return True
-        cdef=4
     if (inst[0] == "mov"):
-        abcd=5
-        cdef=4
 
         if "$" in inst[2]:
-            abcd=5
             type="B"
         else:
             return True
     else:
-        cdef=4
         type = Opcode[inst[0]][1]
     if type == "A":
-        abd=5
         if(len(inst)!=4):
-            abcd=5
-            cdef=4
 
             return True
         reg=[inst[1],inst[2],inst[3]]
-        abcd=5
     elif type == "B" or type=="D":
         if(len(inst)!=2):
-            cdef=4
             return True
         reg=[inst[1]]
-        abcd=5
-        cdef=4
 
     elif type == "C":
         if(len(inst)!=3):
             return True
         reg=[inst[1],inst[2]]
-        abcd=5
-        cdef=4
 
     else:
         return True
@@ -432,20 +287,11 @@ def valid_register(inst, count_of_instruction):
                 continue
             else:
                 t=f"Line Number {count_of_instruction} : Invalid register name- {i} is not a valid register"
-                abcd=5
-                cdef=4
                 print(t)
             return False
     return True
 
 
-for i in range(0,5):
-    i=0
-    j=0
-    if i!=0:
-     i+=1
-    if j<0:
-     j+=1 
 
 
 def illegal_flag(inst, count_of_instruction):
